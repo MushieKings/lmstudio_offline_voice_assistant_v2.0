@@ -37,6 +37,7 @@ import whisper
 import subprocess
 from pygame import mixer #Play sounds and check file size
 from AppOpener import open as appstart, close as appclose
+#import lmstudio as lms
 from openai import OpenAI #Interact with LmStudio
 from vosk import Model, KaldiRecognizer #Speech to text
 from datetime import datetime #Get date and time
@@ -48,7 +49,7 @@ print("If cuda False. Try uninstalling and reinstall the correct pytorch with cu
 torch.cuda.empty_cache()
 
 # Instantiate configuration
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client = OpenAI(base_url="http://127.0.0.1:1234", api_key="lm-studio")
 
 # Basictts init defaults
 basictts = pyttsx3.init('sapi5')
@@ -1253,7 +1254,7 @@ class App(customtkinter.CTk):
         #APPLIO FOLDER
         self.label_applio_folder = customtkinter.CTkLabel(master=self.frame, text="Applio Folder", font=("Impact", 18), text_color="deep sky blue")
         self.label_applio_folder.grid(row=3, column=3, pady=3, padx=6)
-        self.entry_applio_folder = customtkinter.CTkEntry(master=self.frame, placeholder_text="C:\AI\Applio")
+        self.entry_applio_folder = customtkinter.CTkEntry(master=self.frame, placeholder_text=r"C:\AI\Applio")
         self.entry_applio_folder.insert(0, "C:\\AI\\Applio")
         self.entry_applio_folder.grid(row=4, column=3, pady=3, padx=6)
         self.applio_folder = "C:\\AI\\Applio"
@@ -1274,14 +1275,14 @@ class App(customtkinter.CTk):
         #RVC VOICE MODEL
         self.label_applio_vm = customtkinter.CTkLabel(master=self.frame, text="RVC:Voice Model", font=("Impact", 18), text_color="deep sky blue")
         self.label_applio_vm.grid(row=9, column=3, pady=3, padx=6)
-        self.entry_applio_vm = customtkinter.CTkEntry(master=self.frame, placeholder_text="logs\model\model.pth")
+        self.entry_applio_vm = customtkinter.CTkEntry(master=self.frame, placeholder_text=r"logs\model\model.pth")
         self.entry_applio_vm.grid(row=10, column=3, pady=3, padx=6)
         #self.entry_applio_vm.insert(0, "") #Set your default voice model here
         self.applio_voice_model = ""
         #RVC INDEX FILE
         self.label_applio_if = customtkinter.CTkLabel(master=self.frame, text="RVC:Index File", font=("Impact", 18), text_color="deep sky blue")
         self.label_applio_if.grid(row=11, column=3, pady=3, padx=6)
-        self.entry_applio_if = customtkinter.CTkEntry(master=self.frame, placeholder_text="logs\model\model.index")
+        self.entry_applio_if = customtkinter.CTkEntry(master=self.frame, placeholder_text=r"logs\model\model.index")
         self.entry_applio_if.grid(row=12, column=3, pady=3, padx=6)
         #self.entry_applio_if.insert(0, "") #Set your default index model here
         self.applio_index_file = ""
@@ -1345,9 +1346,9 @@ class App(customtkinter.CTk):
         self.autotune_switch.grid(row=14, column=4, padx=3, pady=6)
         self.autotune = "OFF"
         #LANGUAGE SETTINGS DROPDOWN BOX
-        self.language_optionemenu = customtkinter.CTkOptionMenu(self.frame, values=["None", "en", "es", "fr", "de", "it", "ja", "ko", "zh-CN", "ar", "hi", "ru", "pt", "pl", "tr", "nl", "cs", "hu"], command=self.change_language_event)
-        self.language_optionemenu.grid(row=15, column=4, padx=20, pady=(10, 20))
-        self.language_optionemenu.set("None")
+        self.language_optionmenu = customtkinter.CTkOptionMenu(self.frame, values=["None", "en", "es", "fr", "de", "it", "ja", "ko", "zh-CN", "ar", "hi", "ru", "pt", "pl", "tr", "nl", "cs", "hu"], command=self.change_language_event)
+        self.language_optionmenu.grid(row=15, column=4, padx=20, pady=(10, 20))
+        self.language_optionmenu.set("None")
         self.whisperlang = None
 
         #BIG ENTRY FIELD FOR TEXT PLAYBACK
@@ -1481,7 +1482,7 @@ class App(customtkinter.CTk):
         self.entry_st.configure(state="disabled")
         self.entry_silent_chunks.configure(state="disabled")
         self.autotune_switch.configure(state="disabled")
-        self.language_optionemenu.configure(state="disabled")
+        self.language_optionmenu.configure(state="disabled")
         #------------------------------------------------------------------------------
         self.playback_button.configure(state="disabled")
         self.startstop = "ON"
@@ -1528,7 +1529,7 @@ class App(customtkinter.CTk):
         self.entry_st.configure(state="normal")
         self.entry_silent_chunks.configure(state="normal")
         self.autotune_switch.configure(state="normal")
-        self.language_optionemenu.configure(state="normal")
+        self.language_optionmenu.configure(state="normal")
         #-----------------------------------------------------------------------------
         self.playback_button.configure(state="normal")
         self.start_button.configure(fg_color="green",text="Start", command=self.button_start)     

@@ -34,7 +34,7 @@ async def main():
                 tts_voice=applio_tts_voice,
                 tts_rate=applio_rate,
                 pitch=pitchvar,
-                filter_radius=3,
+#                filter_radius=3, # variable not found
                 index_rate=0.75,
                 volume_envelope=1,
                 protect=0.5,
@@ -46,14 +46,15 @@ async def main():
                 index_path=None,
                 split_audio=False,
                 f0_autotune=autotune,
+                f0_autotune_strength=1,
                 clean_audio=True,
                 clean_strength=0.5,
                 export_format="WAV",
                 f0_file=None,
                 embedder_model="contentvec",
                 embedder_model_custom=None,
-                upscale_audio=False,
-                api_name="/run_tts_script"
+#                upscale_audio=False, # variable not found
+#                api_name="/run_tts_script" # variable not found
             )
 
         elif ttsrvc == "RVC":
@@ -62,7 +63,7 @@ async def main():
                 tts_voice=applio_tts_voice,
                 tts_rate=applio_rate,
                 pitch=pitchvar,
-                filter_radius=3,
+#                filter_radius=3,
                 index_rate=0.75,
                 volume_envelope=1,
                 protect=0.5,
@@ -74,14 +75,15 @@ async def main():
                 index_path=applio_index_file,
                 split_audio=False,
                 f0_autotune=autotune,
+                f0_autotune_strength=1,
                 clean_audio=True,
                 clean_strength=0.5,
                 export_format="WAV",
                 f0_file=None,
                 embedder_model="contentvec",
                 embedder_model_custom=None,
-                upscale_audio=False,
-                api_name="/run_tts_script"
+#                upscale_audio=False,
+#                api_name="/run_tts_script"
             )
 
     except ValueError as ve:
