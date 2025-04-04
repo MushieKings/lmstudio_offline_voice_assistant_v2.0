@@ -453,7 +453,10 @@ def input():
             mixer.Sound.play(down_sound)
             mixer.stop()
             hold_input = False
-            return "confirm_input"
+            if app.confirm_on_off == "Confirm ON":
+                return "confirm_input"
+            else:
+                return "input_check"
         time.sleep(0.1)
         counter2 += 1
         if counter2 >= 100 and app.startstop == "ON":
@@ -1190,9 +1193,11 @@ class App(customtkinter.CTk):
         self.scaling_optionemenu = customtkinter.CTkOptionMenu(self.frame, values=["80%", "90%", "100%", "110%", "120%"], command=self.change_scaling_event)
         self.scaling_optionemenu.grid(row=14, column=1, padx=20, pady=(10, 20))
         self.scaling_optionemenu.set("100%")
-        #APPLIO SAVE FILE TIMEOUT LABEL
-        self.labelappliotimeout = customtkinter.CTkLabel(master=self.frame, text="Applio File Save Timeout: 15", font=("Impact", 18), text_color="gold")
-        self.labelappliotimeout.grid(row=15, column=1, columnspan=2, pady=3, padx=6)
+        #CONFIRM TOGGLE BUTTON
+        self.confirm_on_off_switch = customtkinter.CTkSwitch(master=self.frame, text="Confirm ON", font=("Impact", 16), text_color="green", onvalue="Confirm ON", offvalue="Confirm OFF", state="on", command=self.confirm_on_off_switch_update)
+        self.confirm_on_off_switch.grid(row=15, column=1, padx=3, pady=6)
+        self.confirm_on_off_switch.select()
+        self.confirm_on_off = "Confirm ON"
 
         #2nd column LM studio---------------------------------------------------------------------------------
         #TITLE FOR RADIO BUTTONS
@@ -1243,6 +1248,10 @@ class App(customtkinter.CTk):
         self.prespen_slider.grid(row=14, column=2, padx=3, pady=6)
         self.prespen_slider.set(0.0)
         self.lm_presence_p_val = 0.0
+        #APPLIO SAVE FILE TIMEOUT LABEL
+        self.labelappliotimeout = customtkinter.CTkLabel(master=self.frame, text="Applio Save Timeout: 15", font=("Impact", 14), text_color="gold")
+        self.labelappliotimeout.grid(row=15, column=2, columnspan=1, pady=3, padx=6)
+
         #3rd column applio--------------------------------------------------------
         #APPLIO MODE RADIO BUTTON
         self.applio_radio_button = customtkinter.CTkRadioButton(master=self.frame, variable=self.tts_radio_var, value=1, text="Applio TTS", font=("Impact", 14), text_color="gold", command=self.applio_not_stream)
@@ -1395,6 +1404,11 @@ class App(customtkinter.CTk):
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
+    #Confirm ON or OFF
+    def confirm_on_off_switch_update(self):
+        self.confirm_on_off = self.confirm_on_off_switch.get()
+        print(self.confirm_on_off)
+        self.confirm_on_off_switch.configure(text=self.confirm_on_off)
 #2)SECOND_COLUMN----------------------------------------------------------------------------------------------
     #LANGUAGE MODEL TEMPERATURE
     def lm_tempurature_slider_update(self, value):
@@ -1419,7 +1433,7 @@ class App(customtkinter.CTk):
         self.pitch = value
     #APPLIO TIMEOUT SLIDER
     def applio_timeout_slider_update(self, value):
-        self.labelappliotimeout.configure(text=f"Applio File Save Timeout: {value:.1f}") # Update the label with the current slider value
+        self.labelappliotimeout.configure(text=f"Applio Save Timeout: {value:.1f}") # Update the label with the current slider value
         self.applio_timeout = value
 #4)FORTH_COLUMN-----------------------------------------------------------------------------------------------
     #CUDA OR CPU SWITCH
