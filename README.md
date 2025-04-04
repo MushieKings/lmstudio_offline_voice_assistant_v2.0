@@ -13,6 +13,8 @@ https://cmake.org/download/
 
 Make sure Applio is up to date.
 
+Update pip, wheel and setup tools "python -m pip install --upgrade pip setuptools wheel"
+
 -You need to download vosk-model-small-en-us-0.15 or better and extract in root folder
 https://alphacephei.com/vosk/models
 
