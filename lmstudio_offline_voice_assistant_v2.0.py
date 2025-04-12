@@ -49,7 +49,7 @@ print("If cuda False. Try uninstalling and reinstall the correct pytorch with cu
 torch.cuda.empty_cache()
 
 # Instantiate configuration
-client = OpenAI(base_url="http://127.0.0.1:1234", api_key="lm-studio")
+client = OpenAI(base_url="http://127.0.0.1:1234/v1", api_key="lm-studio")
 
 # Basictts init defaults
 basictts = pyttsx3.init('sapi5')
