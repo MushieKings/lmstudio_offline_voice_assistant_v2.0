@@ -1160,7 +1160,7 @@ class App(customtkinter.CTk):
         #VOICEID
         self.labelbttsvoiceid = customtkinter.CTkLabel(master=self.frame, text="BTTS Voiceid: 0", font=("Impact", 18), text_color="deep sky blue")
         self.labelbttsvoiceid.grid(row=3, column=1, pady=3, padx=6)
-        self.btts_voiceid_slider = customtkinter.CTkSlider(self.frame, width=150, from_=0, to=9, number_of_steps=10, command=self.btts_voiceid_slider_update)
+        self.btts_voiceid_slider = customtkinter.CTkSlider(self.frame, width=150, from_=0, to=10, number_of_steps=11, command=self.btts_voiceid_slider_update)
         self.btts_voiceid_slider.grid(row=4, column=1, padx=3, pady=6)
         self.btts_voiceid_slider.set(0)
         #BTTS SPEED

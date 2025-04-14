@@ -12,6 +12,10 @@ https://cmake.org/download/
 
 Make sure Applio is up to date.
 
+Update pip, wheel and setup tools "python -m pip install --upgrade pip setuptools wheel"
+
+To add more basic TTS voices open windows speech settings or language settings. Install the voice packs you want to use then check and see if they work. If the voice packs still don't work you may need to copy the registry settings from HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Voices\Tokens to HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens
+To do this right click on the tokens folder with all the voices you want to copy from Speech_OneCore and click export. Open the file you just saved in a text editor(vs code works well for this). Select all occurances of "Speech_OneCore" and change all occurances to "Speech" then save. Now all you have to do is run the registry file and add the copies to the new registry location. All the voices should now be usable!
 -You need to download vosk-model-small-en-us-0.15 or better and extract in root folder
 https://alphacephei.com/vosk/models
 
